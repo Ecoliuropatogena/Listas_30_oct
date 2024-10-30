@@ -1,0 +1,82 @@
+---
+title: "Listas"
+author: "Ivan"
+date: "2024-10-30"
+output: html_document
+---
+
+## Crea una lista que contenga al menos cuatro tipos diferentes de datos (incluyendo al menos un vector, una matriz, y un data frame). Luego, escribe código para acceder a cada uno de estos elementos por su índice.
+
+```{r}
+sample(1:100, 4) -> dat_mat
+matrix(dat_mat, nrow = 2) -> matriz
+
+lista_1 <- list(
+  vec = c("Verde", "Rojo", "Azul"),
+  mat = matrix(sample(1:100,4),nrow =2),
+  dat = data.frame(hongo = c("Aspergillus", "Amanita"), Estado = c("Asexual", "Sexual")),
+  lis = list(
+    nombres = c("Santiago", "Miguel", "Abraham", "Joaquin"),
+    edades = c(23,21,22,25)
+  )
+  
+)
+
+lista_1[[1]]
+lista_1[[2]]
+lista_1[[3]]
+lista_1[[4]][1]
+lista_1[[4]][2]
+
+```
+
+## Añade un nuevo elemento a la compleja_lista que sea otra lista conteniendo información relevante a un experimento microbiológico (p.ej., fechas, resultados de crecimiento, tipo de medio de cultivo). Accede a un elemento específico dentro de esta lista anidada.
+
+```{r}
+list_exp <- list(
+  cultivos = list(
+    medio = c("PDA", "Mckonkey", "LB"),
+    inoculo = c("Fusarium", "E. coli", "Klebsiella")),
+  incubcion = list(
+    hongos = c("25 ºC"),
+    bacterias = c("15 ºC", "20 ºC")
+  )
+)
+
+list_exp[[1]][1] # Así accedo al primer elemento de la primer
+# lista de mi lista.
+```
+
+## Mantén un registro de resistencias a antibióticos.Crea una lista resistencias con 3 elementos, cada uno representando una bacteria. Cada elemento debe ser una lista con: Bacteria, AntibióticosResistentes (vector de nombres de antibióticos). Encuentra la bacteria con más resistencias.
+
+```{r}
+resistencias <- list(
+  Lysteria = list(
+    Nombre = c("Listeria monocytogenes"),
+    Resistente_a = c("penicilina", "cefalosporina")),
+  S.aureus = list(
+    Nombre = c("Staphylococcus aureus"),
+    Resistente_a = c("Penicilina", "Cefalosporina", "Tetraciclina", "Ciprofloxacina")),
+  Legionella = list(
+    Nombre = c("Legionella"),
+    Resistente_a = c("Penicilina", "Tetraciclina", "Cefalosporina")
+  )
+)
+
+resistencias
+
+R1 <- length(resistencias$Lysteria$Resistente_a)
+R2 <- length(resistencias$S.aureus$Resistente_a)
+R3 <- length(resistencias$Legionella$Resistente_a)
+
+
+if (R1 > R2 & R1 > R3) {
+  print("Listeria es la bacteria con más resitencia a farmacos")
+} else if ( R2 > R1 & R2 > R3) {
+  print("Staphylococcus aureus es la bacteria más resistente a farmacos")
+} else {
+ print("Legionella es la bacteria más resistente a farmacos")
+}
+
+
+```
